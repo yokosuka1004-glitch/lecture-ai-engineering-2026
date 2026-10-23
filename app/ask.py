@@ -42,6 +42,8 @@ def main() -> None:
         print(ask(args.question))
     except errors.APIError as e:
         print(api_error_message(e.code, e.message))
+        print(f"[API code] {e.code}")
+        print(f"[API message] {e.message}")
         raise SystemExit(1)
 
 
