@@ -72,13 +72,16 @@ def search_glossary(query: str) -> str:
 def get_lecture_summary(lecture: int) -> str:
     """指定した回（1始まりの整数）の講義の要点を返す。
 
-    「第3回では何を学ぶ？」のように、回の内容や関係を聞かれたときに使う。
+    「第2回では何を学びますか？」など、講義全体の内容や学習目標を聞かれたら、このツールを優先して使う。
+    lecture には質問に含まれる回の番号を整数で指定する（例：第2回なら2）。
     """
     path = DATA_DIR / "lectures" / f"{lecture:02d}.md"
     if not path.exists():
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
 
 
 def search_materials(query: str) -> str:
